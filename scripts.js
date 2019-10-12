@@ -24,33 +24,38 @@ try
 }
 catch(e)
 {
-    console.log(e);
-    console.log("Soz, deleted your vote.")
+}
+if (!voted) {
     voted = {};
-    localStorage.setItem('voted', JSON.stringify(voted));
 }
 
 function createVm(all) {
     new Vue({
-        el: "#datatable",
+        el: "#app",
         data: {
             games: [],
             message: "",
             sortValue: function(x) {
                 return x.magic.smart;
-            }
+            },
+            done: true,
+            voted: {}
         },
         computed: {
             sorted: function() {
                 return this.games.sort((a, b) => {
                     // desc. *-1 to do it right.
-                    return this.sortValue(a) < this.sortValue(b) ? 1 :
-                           this.sortValue(a) > this.sortValue(b) ? -1 :
+                    return (this.sortValue(a) || 0) < (this.sortValue(b) || 0) ? 1 :
+                           (this.sortValue(a) || 0) > (this.sortValue(b) || 0) ? -1 :
                            0;
                 });
             }
         },
         methods: {
+            setVoted: function(item) {
+                voted[item.id] != voted[item.id];
+                localStorage.setItem('voted', JSON.stringify(voted));
+            },
             sort: function(index, arg1, arg2) {
                 this.sortIndex = index;
                 let col = columns[index];
@@ -68,7 +73,9 @@ function createVm(all) {
             }
         },
         created: function() {
-            this.games = all;
+            this.updated = all.updated;
+            this.games = all.items;
+            this.voted = voted;
         },
         mounted: function() {
         }
@@ -78,9 +85,9 @@ function createVm(all) {
 fetch("./data.json")
     .then(response => {
         console.log("got data");
-        response.json().then(data => {
+        response.json().then(response => {
             console.log("got json");
-            console.log(data.length);
+            let data = response.items;
             data.forEach(x => {
                 if (!x.grade) {
                     x.grade = {}
@@ -90,7 +97,7 @@ fetch("./data.json")
             document.getElementsByTagName("table")[0].style.display = "";
             document.getElementById("loading").style.display = "none";
 
-            createVm(data);
+            createVm(response);
         })
         .catch(e => {
             console.log(e);
@@ -118,5 +125,3 @@ fetch("./data.json")
 //     }, 
 //     50
 // );
-
-console.log("gtf on with it, github. ;)")
