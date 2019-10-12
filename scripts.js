@@ -118,3 +118,5 @@ fetch("./data.json")
 //     }, 
 //     50
 // );
+
+console.log("gtf on with it, github. ;)")
