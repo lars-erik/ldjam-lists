@@ -17,4 +17,8 @@ while($count -ge $limit) {
     $items = invoke-restmethod -Uri "https://api.ldjam.com/vx/node2/get/$($idstring)"
     $nodes.AddRange($items.node)
 }
+"{
+    ""updated"":""$([System.DateTime]::Now.ToString("yyyy-MM-dd HH:mm"))"",
+    ""items"":"
 $nodes | ConvertTo-Json
+"}"
