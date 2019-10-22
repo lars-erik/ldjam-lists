@@ -29,6 +29,30 @@ if (!voted) {
     voted = {};
 }
 
+let converter = new showdown.Converter();
+Vue.directive('show-info', {
+    bind: function(el, binding) {
+        let body = binding.value.body.replace("///raw", "https://static.jam.vg/raw"),
+            html = converter.makeHtml(body);
+        let child = document.createElement("div");
+        child.className = "info";
+        el.addEventListener("mouseover", function(evt) {
+            document.body.appendChild(child);
+            child.innerHTML = html;
+            child.style.width = (window.innerWidth * .7) + "px";
+            child.style.left = evt.pageX + "px";
+            child.style.top = (evt.pageY + 5) + "px";
+        });
+        el.addEventListener("mousemove", function(evt) {
+            child.style.left = evt.pageX + "px";
+            child.style.top = (evt.pageY + 5) + "px";
+        });
+        el.addEventListener("mouseout", function() {
+            document.body.removeChild(child);
+        });
+    }
+});
+
 function createVm(all) {
     new Vue({
         el: "#app",
