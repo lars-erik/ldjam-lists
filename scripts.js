@@ -32,13 +32,13 @@ if (!voted) {
 let converter = new showdown.Converter();
 Vue.directive('show-info', {
     bind: function(el, binding) {
-        let body = binding.value.body.replace("///raw", "https://static.jam.vg/raw"),
-            html = converter.makeHtml(body);
         let child = document.createElement("div");
+        let body = binding.value.replace("///raw", "https://static.jam.vg/raw"),
+            html = converter.makeHtml(body);
         child.className = "info";
         el.addEventListener("mouseover", function(evt) {
-            document.body.appendChild(child);
             child.innerHTML = html;
+            document.body.appendChild(child);
             child.style.width = (window.innerWidth * .7) + "px";
             child.style.left = evt.pageX + "px";
             child.style.top = (evt.pageY + 5) + "px";
@@ -50,6 +50,10 @@ Vue.directive('show-info', {
         el.addEventListener("mouseout", function() {
             document.body.removeChild(child);
         });
+    },
+    update: function(el, binding) {
+        let body = binding.value.replace("///raw", "https://static.jam.vg/raw");
+        html = converter.makeHtml(body);
     }
 });
 

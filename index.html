@@ -107,7 +107,7 @@
                         <th>{{index + 1}}</th>
                         <th>{{game.subsubtype}}</th>
                         <th><a :href="'https://ldjam.com/events/ludum-dare/45/' + game.slug"
-                                v-show-info="game"
+                                v-show-info="game.body"
                                 target="_blank">{{game.name}}</a></th>
                         <td>{{game.grade['grade-01']}}</td>
                         <td>{{game.grade['grade-02']}}</td>
