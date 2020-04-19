@@ -36,7 +36,7 @@ function createVm(all) {
             games: [],
             message: "",
             sortValue: function(x) {
-                return x.magic.smart;
+                return (x.magic || {}).smart;
             },
             done: true,
             voted: {}

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>LDJam 45 stats</title>
+    <title>LDJam 46 stats</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://use.fontawesome.com/ab410d7b1e.js"></script>
@@ -43,8 +43,9 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-dark bg-dark navbar-expand">
-            <span class="navbar-brand">LDJam 45</span>
+            <span class="navbar-brand">LDJam 46</span>
             <span style="color: white; display: none;" v-show="done">Updated: {{updated}}</span>
+            <span style="color: white;">Shameless promo: <a href="https://ldjam.com/events/ludum-dare/46/yab">My submission. 😇</a></span>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <!-- <li class="nav-item">
@@ -103,11 +104,11 @@
                         <td>{{game.grade['grade-06']}}</td>
                         <td>{{game.grade['grade-07']}}</td>
                         <td>{{game.grade['grade-08']}}</td>
-                        <td>{{Math.round(game.magic.feedback, 1)}}</td>
-                        <td>{{game.magic.given}}</td>
-                        <td>{{Math.round(game.magic.grade, 1)}}</td>
-                        <td>{{Math.round(game.magic.cool, 1)}}</td>
-                        <td>{{Math.round(game.magic.smart, 1)}}</td>
+                        <td>{{Math.round((game.magic || {}).feedback, 1)}}</td>
+                        <td>{{(game.magic || {}).given}}</td>
+                        <td>{{Math.round((game.magic || {}).grade, 1)}}</td>
+                        <td>{{Math.round((game.magic || {}).cool, 1)}}</td>
+                        <td>{{Math.round((game.magic || {}).smart, 1)}}</td>
                         <td style="text-align:center"><input type="checkbox" v-model="voted[game.id]" @change="setVoted(game)"></td>
                     </tr>
                 </tbody>
