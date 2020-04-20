@@ -62,7 +62,7 @@ function createVm(all) {
                 if (!col[1]) {
                     this.sortValue = x => x[col[0]];
                 } else {
-                    this.sortValue = x => x[col[0]][col[1]];
+                    this.sortValue = x => (x[col[0]] || {})[col[1]];
                 }
             },
             headerClass: function(index) {
