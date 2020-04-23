@@ -35,6 +35,7 @@ function createVm(all) {
         data: {
             games: [],
             message: "",
+            filter: ["compo", "jam"],
             sortValue: function(x) {
                 return (x.magic || {}).smart;
             },
@@ -43,12 +44,15 @@ function createVm(all) {
         },
         computed: {
             sorted: function() {
-                return this.games.sort((a, b) => {
+                return this.list.sort((a, b) => {
                     // desc. *-1 to do it right.
                     return (this.sortValue(a) || 0) < (this.sortValue(b) || 0) ? 1 :
                            (this.sortValue(a) || 0) > (this.sortValue(b) || 0) ? -1 :
                            0;
                 });
+            },
+            list: function() {
+                return this.games.filter(x => this.filter.indexOf(x.subsubtype) > -1)
             }
         },
         methods: {

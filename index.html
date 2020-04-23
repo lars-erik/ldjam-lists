@@ -7,6 +7,10 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://use.fontawesome.com/ab410d7b1e.js"></script>
     <style>
+        body {
+            margin-top: 60px;
+        }
+
         .header-row th {
             cursor: pointer;
         }
@@ -27,6 +31,18 @@
         .table-sm th {
             padding-left: .5rem;
         }
+
+        .filter {
+            color: white;
+            padding-left: 15px;
+            padding-right: 20px;
+            margin-top: 9px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: underline;
+        }
     </style>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44569969-9"></script>
@@ -42,28 +58,18 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-dark bg-dark navbar-expand">
+        <nav class="navbar navbar-dark bg-dark navbar-expand fixed-top">
             <span class="navbar-brand">LDJam 46</span>
+            <span class="filter">
+                <label><input type="checkbox" v-model="filter" value="compo" />Compo</label>
+                <label><input type="checkbox" v-model="filter" value="jam" />Jam</label>
+            </span>
             <span style="color: white; display: none;" v-show="done">Updated: {{updated}}&nbsp;|&nbsp;</span>
-            <span style="color: white;">Shameless promo: <a href="https://ldjam.com/events/ludum-dare/46/yab">My
-                    submission. 😇</a></span>
+            <span style="color: white;">Shameless promo: <a href="https://ldjam.com/events/ludum-dare/46/yab">My submission</a> 😇&nbsp;|&nbsp;</span>
+            <span style="color: white;"><a href="https://github.com/lars-erik/ldjam-lists">Github repo</a></span>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <!-- <li class="nav-item">
-                <a href="feedback.html" class="nav-link">feedback</a>
-            </li>
-            <li class="nav-item">
-                <a href="grade.html" class="nav-link">grade</a>
-            </li>
-            <li class="nav-item active">
-                <a href="cool.html" class="nav-link">cool</a>
-            </li>
-            <li class="nav-item">
-                <a href="smart.html" class="nav-link">smart</a>
-            </li>
-            <li class="nav-item">
-                <a href="about.html" class="nav-link">about</a>
-            </li> -->
                 </ul>
             </div>
         </nav>
