@@ -40,7 +40,8 @@ function createVm(all) {
                 return (x.magic || {}).smart;
             },
             done: true,
-            voted: {}
+            voted: {},
+            importExport: ""
         },
         computed: {
             sorted: function() {
@@ -59,6 +60,13 @@ function createVm(all) {
             setVoted: function(item) {
                 voted[item.id] != voted[item.id];
                 localStorage.setItem('voted', JSON.stringify(voted));
+                this.importExport = btoa(JSON.stringify(voted));
+            },
+            exportVotes: function() {
+                console.log(btoa(JSON.stringify(voted)));
+            },
+            importVotes: function() {
+                this.voted = voted = JSON.parse(atob(this.importExport));
             },
             sort: function(index, arg1, arg2) {
                 this.sortIndex = index;
@@ -80,6 +88,7 @@ function createVm(all) {
             this.updated = all.updated;
             this.games = all.items;
             this.voted = voted;
+            this.importExport = btoa(JSON.stringify(voted));
         },
         mounted: function() {
         }
@@ -110,22 +119,3 @@ fetch("./data.json")
     .catch(e => {
         console.log(e);
     });
-
-// for some reason edge loses check state in gui unless slight timeout
-// setTimeout(
-//     function() {
-//         Array
-//         .from(document.getElementsByTagName("input"))
-//         .forEach(element => {
-//             element.addEventListener("click", function() {
-//                 voted[this.id] = this.checked;
-//                 localStorage.setItem('voted', JSON.stringify(voted));
-//             });
-//             if (voted[element.id]) {
-//                 element.checked = true;
-//             }
-//         });
-   
-//     }, 
-//     50
-// );

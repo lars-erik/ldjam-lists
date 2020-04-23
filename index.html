@@ -75,6 +75,11 @@
         </nav>
         <div class="container-fluid">
             <span id="loading">Big table is loading, please be patient.</span>
+            <div v-show="done" style=display:none;>
+                <input type="text" name="bindata" v-model="importExport" v-model="bindata" onfocus="this.select();"/>
+                <a href="javascript:void(0);" v-on:click="importVotes()">Import votes (DANGER!)</a>
+                (Copy text to export)
+            </div>
             <table class="table table-striped table-sm" style="display:none;" id="datatable">
                 <tbody id="headerbody">
                     <tr class="header-row">
