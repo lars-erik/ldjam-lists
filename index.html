@@ -43,6 +43,11 @@
             color: white;
             text-decoration: underline;
         }
+
+        .cover img {
+            width: 233px;
+            height: 186px;
+        }
     </style>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44569969-9"></script>
@@ -57,7 +62,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" v-on:mousemove="moveCover">
         <nav class="navbar navbar-dark bg-dark navbar-expand fixed-top">
             <span class="navbar-brand">LDJam 46</span>
             <span class="filter">
@@ -107,6 +112,8 @@
                         <th>{{index + 1}}</th>
                         <th>{{game.subsubtype}}</th>
                         <th><a :href="'https://ldjam.com/events/ludum-dare/46/' + game.slug"
+                                v-on:mouseover="showCover(game)"
+                                v-on:mouseout="hideCover()"
                                 target="_blank">{{game.name}}</a></th>
                         <td>{{game.grade['grade-01']}}</td>
                         <td>{{game.grade['grade-02']}}</td>
@@ -126,6 +133,9 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="cover" v-if="showingCover" :style="coverStyle">
+            <img :src="cover"/>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>

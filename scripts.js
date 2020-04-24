@@ -41,7 +41,15 @@ function createVm(all) {
             },
             done: true,
             voted: {},
-            importExport: ""
+            importExport: "",
+            showingCover: false,
+            coverStyle: {
+                position: 'fixed',
+                zIndex: 99,
+                left: 0,
+                top: 0
+            },
+            cover: ""
         },
         computed: {
             sorted: function() {
@@ -82,6 +90,19 @@ function createVm(all) {
             },
             sortClass: function(index) {
                 return this.sortIndex === index ? "fas fa-angle-up" : "";
+            },
+            moveCover: function(evt) {
+                if (this.showingCover) {
+                    this.coverStyle.left = (evt.clientX + 5) + "px";
+                    this.coverStyle.top = (evt.clientY + 5) + "px";
+                }
+            },
+            showCover: function(game) {
+                this.showingCover = true;
+                this.cover = 'https://static.jam.vg' + (game.meta.cover || "").substr(2);
+            },
+            hideCover: function() {
+                this.showingCover = false;
             }
         },
         created: function() {
